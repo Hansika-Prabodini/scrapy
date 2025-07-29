@@ -43,5 +43,5 @@ class Command(ScrapyCommand):
 
         sfile = sys.modules[spidercls.__module__].__file__
         assert sfile
-        sfile = sfile.replace(".pyc", ".py")
+        sfile = sfile[:-1] if sfile.endswith('c') else sfile  # Optimize file extension handling
         self.exitcode = os.system(f'{editor} "{sfile}"')  # noqa: S605
